@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Generate a <br><span>Random Password</span></h1>
+        <div class="display">
+            <input type="text" id="password" placeholder="Password">
+            <i class="fa-regular fa-copy fa-2xl" onclick="copyPassword()"></i>
+            <div id="hint">Your password had been copied!</div>
+        </div>
+        <button onclick="createPassword()"><i class="fa-solid fa-gear fa-2xl"></i>Generate Password</button>
+    </div>
+
+    <script>
+        const passwordBox = document.getElementById('password');
+        const length = 12;
+        const upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const lowerCase = 'abcdefghijklmnopqrstuvwxyz';
+        const numbers = '0123456789';
+        const symbols = '!@#$%^&*()_+';
+
+        const allChars = upperCase + lowerCase + numbers + symbols;
+
+        function createPassword() {
+            let password = '';
+            password += upperCase[Math.floor(Math.random() * upperCase.length)];
+            password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+            password += numbers[Math.floor(Math.random() * numbers.length)];
+            password += symbols[Math.floor(Math.random() * symbols.length)];
+
+            while (password.length < length) {
+                password += allChars[Math.floor(Math.random() * allChars.length)];
+            }
+
+            passwordBox.value = password;
+        }
+
+        function copyPassword() {
+            passwordBox.select();
+            document.execCommand('copy');
+            var hint = document.getElementById('hint');
+            hint.style.display = 'block'; // Show the hint
+            setTimeout(function () {
+                hint.style.display = 'none'; // Hide the hint after 2 seconds
+            }, 2000);
+        };
+    </script>
+</body>
+
+</html>
