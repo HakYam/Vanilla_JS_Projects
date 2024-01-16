@@ -76,8 +76,8 @@ body {
 
 #hint {
     display: none;
-    position: absolute;
-    right: 500px;
+    
+    right: 150px;
     font-size: 13px;
     color: #019f55;
 
