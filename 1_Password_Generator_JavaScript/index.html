@@ -14,11 +14,12 @@
         <h1>Generate a <br><span>Random Password</span></h1>
         <div class="display">
             <input type="text" id="password" placeholder="Password">
-            <div id="hint">Your password had been copied!</div>
+            
             <i class="fa-regular fa-copy fa-2xl" onclick="copyPassword()"></i>
             
         </div>
         <button onclick="createPassword()"><i class="fa-solid fa-gear fa-2xl"></i>Generate Password</button>
+        <div id="hint">Your password had been copied!</div>
     </div>
 
     <script>
@@ -49,7 +50,7 @@
             passwordBox.select();
             document.execCommand('copy');
             var hint = document.getElementById('hint');
-            hint.style.display = 'block'; // Show the hint
+            hint.style.display = 'inline-block'; // Show the hint
             setTimeout(function () {
                 hint.style.display = 'none'; // Hide the hint after 2 seconds
             }, 2000);

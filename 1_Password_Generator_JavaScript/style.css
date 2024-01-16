@@ -22,16 +22,46 @@ body {
     margin-bottom: 30px;
     background: #fff;
     color: #333;
-    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 26px 20px;
     border-radius: 5px;
+    position: relative;
 }
+
+/* Responsive adjustments */
+
+@media (max-width: 768px) { /* Adjusts for tablets and smaller devices */
+    .container {
+        margin: 5%;
+        max-width: 90%;
+    }
+
+    .display {
+        flex-direction: row;
+        padding: 15px 10px;
+    }
+
+
+}
+
+@media (max-width: 480px) { /* Adjusts for mobile phones */
+    .container {
+        margin: 2%;
+        max-width: 96%;
+    }
+
+    .display {
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+}
+
 
 .container h1 {
     font-weight: 500;
-    font-size: 45px;
+    font-size: 40px;
 
 }
 
@@ -44,7 +74,6 @@ body {
 .display i {
     color: #019f55;
     cursor: pointer;
-    position: relative;
 }
 
 .display input {
@@ -76,9 +105,9 @@ body {
 
 #hint {
     display: none;
-    
-    right: 150px;
+    margin-top: 20px;
     font-size: 13px;
-    color: #019f55;
+    color: #fff;
+    font-weight: 100;
 
 }
