@@ -47,6 +47,9 @@
         }
 
         function copyPassword() {
+            if (passwordBox.value === '') {
+                return;
+            }
             passwordBox.select();
             document.execCommand('copy');
             var hint = document.getElementById('hint');
