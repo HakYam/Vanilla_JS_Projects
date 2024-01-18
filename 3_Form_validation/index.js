@@ -73,7 +73,7 @@ function validateMessage () {
 };
 
 function validateForm() {
-    if (!validateName() || validatePhone() || validateEmail () || validateMessage ()) {
+    if (!validateName() || !validatePhone() || !validateEmail () || !validateMessage ()) {
         submitError.style.display = 'block';
         submitError.innerHTML = 'Please check the required fields';
 
@@ -82,4 +82,5 @@ function validateForm() {
         }, 3000);
         return false;
     }
-};
+
+    };
