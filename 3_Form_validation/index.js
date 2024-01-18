@@ -79,7 +79,7 @@ function validateForm() {
 
         setTimeout (function(){
             submitError.style.display = 'none';
-        }, 2500);
+        }, 3000);
         return false;
     }
 };
