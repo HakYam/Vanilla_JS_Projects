@@ -36,15 +36,26 @@
         // For touch devices
         list.addEventListener('touchstart', function (e) {
             let selectedList = e.target;
-            let initialX = e.touches[0].clientX;
-            let initialY = e.touches[0].clientY;
+            let offsetX = e.touches[0].clientX - selectedList.getBoundingClientRect().left;
+            let offsetY = e.touches[0].clientY - selectedList.getBoundingClientRect().top;
+
+            // Create a clone for visual effect
+            let clone = selectedList.cloneNode(true);
+            clone.style.position = 'absolute';
+            clone.style.left = `${e.touches[0].clientX - offsetX}px`;
+            clone.style.top = `${e.touches[0].clientY - offsetY}px`;
+            clone.style.width = `${selectedList.offsetWidth}px`;
+            clone.style.height = `${selectedList.offsetHeight}px`;
+            clone.style.opacity = '0.7';
+            clone.style.pointerEvents = 'none'; // Prevent the clone from capturing events
+            document.body.appendChild(clone);
 
             function moveAt(pageX, pageY) {
-                selectedList.style.left = pageX - selectedList.offsetWidth / 2 + 'px';
-                selectedList.style.top = pageY - selectedList.offsetHeight / 2 + 'px';
+                clone.style.left = `${pageX - offsetX}px`;
+                clone.style.top = `${pageY - offsetY}px`;
             }
 
-            // Move the list item on touch move
+            // Move the clone on touch move
             document.addEventListener('touchmove', function (e) {
                 e.preventDefault();
                 moveAt(e.touches[0].pageX, e.touches[0].pageY);
@@ -64,18 +75,39 @@
                     leftBox.appendChild(selectedList);
                 }
 
-                // Clean up event listeners
+                // Clean up
+                document.body.removeChild(clone);
                 document.removeEventListener('touchmove', this);
                 document.removeEventListener('touchend', this);
 
                 selectedList = null;
+                clone = null;
             });
         });
 
+        // Drop the list item on touch end
+        document.addEventListener('touchend', function (e) {
+            let touchX = e.changedTouches[0].clientX;
+            let touchY = e.changedTouches[0].clientY;
+
+            // Determine if the drop is within the bounds of the rightBox or leftBox
+            if (touchX >= rightBox.offsetLeft && touchX <= rightBox.offsetLeft + rightBox.offsetWidth &&
+                touchY >= rightBox.offsetTop && touchY <= rightBox.offsetTop + rightBox.offsetHeight) {
+                rightBox.appendChild(selectedList);
+            } else if (touchX >= leftBox.offsetLeft && touchX <= leftBox.offsetLeft + leftBox.offsetWidth &&
+                touchY >= leftBox.offsetTop && touchY <= leftBox.offsetTop + leftBox.offsetHeight) {
+                leftBox.appendChild(selectedList);
+            }
+
+            // Clean up event listeners
+            document.removeEventListener('touchmove', this);
+            document.removeEventListener('touchend', this);
+
+            selectedList = null;
+        });
+
+
         // For non-touch devices
-
-
-
         list.addEventListener('dragstart', function (e) {
             let selectedList = e.target;
 
