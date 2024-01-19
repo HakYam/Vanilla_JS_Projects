@@ -55,7 +55,7 @@ background: linear-gradient(0deg, rgb(20, 1, 43) 0%, rgb(72, 0, 131) 100%);
     color: #fff;
     font-size: 2rem;
     @media (max-width: 480px) {
-        font-size: 0.7rem;
-        top: 9%;
+        font-size: 1rem;
+        top: 12%;
     }
 }

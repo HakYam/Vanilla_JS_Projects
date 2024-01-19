@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Drag and Drop</title>
 </head>
+
 <body>
-    <div class="title"><h2>I'm draggable, try!</h2></div>
+    <div class="title">
+        <h2>I'm draggable, try!</h2>
+    </div>
     <div class="container">
-        
+
         <div id="left">
             <div class="list" draggable="true"><i class="fa-solid fa-ellipsis-vertical fa-lg"></i>List Item 1</div>
             <div class="list" draggable="true"><i class="fa-solid fa-ellipsis-vertical fa-lg"></i>List Item 2</div>
@@ -28,26 +32,71 @@
     let leftBox = document.getElementById('left');
 
     for (list of lists) {
+
+        // For touch devices
+        list.addEventListener('touchstart', function (e) {
+            let selectedList = e.target;
+            let initialX = e.touches[0].clientX;
+            let initialY = e.touches[0].clientY;
+
+            function moveAt(pageX, pageY) {
+                selectedList.style.left = pageX - selectedList.offsetWidth / 2 + 'px';
+                selectedList.style.top = pageY - selectedList.offsetHeight / 2 + 'px';
+            }
+
+            // Move the list item on touch move
+            document.addEventListener('touchmove', function (e) {
+                e.preventDefault();
+                moveAt(e.touches[0].pageX, e.touches[0].pageY);
+            }, { passive: false });
+
+            // Drop the list item on touch end
+            document.addEventListener('touchend', function (e) {
+                let touchX = e.changedTouches[0].clientX;
+                let touchY = e.changedTouches[0].clientY;
+
+                // Determine if the drop is within the bounds of the rightBox or leftBox
+                if (touchX >= rightBox.offsetLeft && touchX <= rightBox.offsetLeft + rightBox.offsetWidth &&
+                    touchY >= rightBox.offsetTop && touchY <= rightBox.offsetTop + rightBox.offsetHeight) {
+                    rightBox.appendChild(selectedList);
+                } else if (touchX >= leftBox.offsetLeft && touchX <= leftBox.offsetLeft + leftBox.offsetWidth &&
+                    touchY >= leftBox.offsetTop && touchY <= leftBox.offsetTop + leftBox.offsetHeight) {
+                    leftBox.appendChild(selectedList);
+                }
+
+                // Clean up event listeners
+                document.removeEventListener('touchmove', this);
+                document.removeEventListener('touchend', this);
+
+                selectedList = null;
+            });
+        });
+
+        // For non-touch devices
+
+
+
         list.addEventListener('dragstart', function (e) {
             let selectedList = e.target;
 
-            rightBox.addEventListener ('dragover', function (e) {
+            rightBox.addEventListener('dragover', function (e) {
                 e.preventDefault();
             })
-            rightBox.addEventListener ('drop', function (e) {
+            rightBox.addEventListener('drop', function (e) {
                 rightBox.appendChild(selectedList);
                 selectedList = null;
             });
 
             //from right to left
-            leftBox.addEventListener ('dragover', function (e) {
+            leftBox.addEventListener('dragover', function (e) {
                 e.preventDefault();
             })
-            leftBox.addEventListener ('drop', function (e) {
+            leftBox.addEventListener('drop', function (e) {
                 leftBox.appendChild(selectedList);
                 selectedList = null;
             });
         })
     }
 </script>
+
 </html>
