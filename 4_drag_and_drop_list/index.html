@@ -27,108 +27,82 @@
     </div>
 </body>
 <script>
-    let lists = document.getElementsByClassName('list');
-    let rightBox = document.getElementById('right');
-    let leftBox = document.getElementById('left');
+const lists = document.getElementsByClassName('list');
+const rightBox = document.getElementById('right');
+const leftBox = document.getElementById('left');
 
-    for (list of lists) {
+// Function to determine if the drop is within the specified box
+const isWithinBox = (box, x, y) => 
+    x >= box.offsetLeft && x <= box.offsetLeft + box.offsetWidth &&
+    y >= box.offsetTop && y <= box.offsetTop + box.offsetHeight;
 
-        // For touch devices
-        list.addEventListener('touchstart', function (e) {
-            let selectedList = e.target;
-            let offsetX = e.touches[0].clientX - selectedList.getBoundingClientRect().left;
-            let offsetY = e.touches[0].clientY - selectedList.getBoundingClientRect().top;
+// Function to handle the clone movement
+const moveClone = (clone, offsetX, offsetY, pageX, pageY) => {
+    clone.style.left = `${pageX - offsetX}px`;
+    clone.style.top = `${pageY - offsetY}px`;
+};
 
-            // Create a clone for visual effect
-            let clone = selectedList.cloneNode(true);
-            clone.style.position = 'absolute';
-            clone.style.left = `${e.touches[0].clientX - offsetX}px`;
-            clone.style.top = `${e.touches[0].clientY - offsetY}px`;
-            clone.style.width = `${selectedList.offsetWidth}px`;
-            clone.style.height = `${selectedList.offsetHeight}px`;
-            clone.style.opacity = '0.7';
-            clone.style.pointerEvents = 'none'; // Prevent the clone from capturing events
-            document.body.appendChild(clone);
+// Function to append the selected list to the appropriate box
+const appendToList = (box, list) => {
+    box && box.appendChild(list);
+};
 
-            function moveAt(pageX, pageY) {
-                clone.style.left = `${pageX - offsetX}px`;
-                clone.style.top = `${pageY - offsetY}px`;
-            }
-
-            // Move the clone on touch move
-            document.addEventListener('touchmove', function (e) {
-                e.preventDefault();
-                moveAt(e.touches[0].pageX, e.touches[0].pageY);
-            }, { passive: false });
-
-            // Drop the list item on touch end
-            document.addEventListener('touchend', function (e) {
-                let touchX = e.changedTouches[0].clientX;
-                let touchY = e.changedTouches[0].clientY;
-
-                // Determine if the drop is within the bounds of the rightBox or leftBox
-                if (touchX >= rightBox.offsetLeft && touchX <= rightBox.offsetLeft + rightBox.offsetWidth &&
-                    touchY >= rightBox.offsetTop && touchY <= rightBox.offsetTop + rightBox.offsetHeight) {
-                    rightBox.appendChild(selectedList);
-                } else if (touchX >= leftBox.offsetLeft && touchX <= leftBox.offsetLeft + leftBox.offsetWidth &&
-                    touchY >= leftBox.offsetTop && touchY <= leftBox.offsetTop + leftBox.offsetHeight) {
-                    leftBox.appendChild(selectedList);
-                }
-
-                // Clean up
-                document.body.removeChild(clone);
-                document.removeEventListener('touchmove', this);
-                document.removeEventListener('touchend', this);
-
-                selectedList = null;
-                clone = null;
-            });
+for (const list of lists) {
+    list.addEventListener('touchstart', function(e) {
+        let selectedList = e.target;
+        const { clientX, clientY } = e.touches[0];
+        const offsetX = clientX - selectedList.getBoundingClientRect().left;
+        const offsetY = clientY - selectedList.getBoundingClientRect().top;
+        let clone = selectedList.cloneNode(true);
+        Object.assign(clone.style, {
+            position: 'absolute',
+            left: `${clientX - offsetX}px`,
+            top: `${clientY - offsetY}px`,
+            width: `${selectedList.offsetWidth}px`,
+            height: `${selectedList.offsetHeight}px`,
+            opacity: '0.7',
+            pointerEvents: 'none',
         });
+        document.body.appendChild(clone);
 
-        // Drop the list item on touch end
-        document.addEventListener('touchend', function (e) {
-            let touchX = e.changedTouches[0].clientX;
-            let touchY = e.changedTouches[0].clientY;
+        const touchMoveHandler = (e) => {
+            e.preventDefault();
+            moveClone(clone, offsetX, offsetY, e.touches[0].pageX, e.touches[0].pageY);
+        };
 
-            // Determine if the drop is within the bounds of the rightBox or leftBox
-            if (touchX >= rightBox.offsetLeft && touchX <= rightBox.offsetLeft + rightBox.offsetWidth &&
-                touchY >= rightBox.offsetTop && touchY <= rightBox.offsetTop + rightBox.offsetHeight) {
-                rightBox.appendChild(selectedList);
-            } else if (touchX >= leftBox.offsetLeft && touchX <= leftBox.offsetLeft + leftBox.offsetWidth &&
-                touchY >= leftBox.offsetTop && touchY <= leftBox.offsetTop + leftBox.offsetHeight) {
-                leftBox.appendChild(selectedList);
-            }
+        const touchEndHandler = (e) => {
+            const { clientX, clientY } = e.changedTouches[0];
+            document.body.removeChild(clone);
+            appendToList(isWithinBox(rightBox, clientX, clientY) ? rightBox :
+                         isWithinBox(leftBox, clientX, clientY) ? leftBox : null, selectedList);
+            document.removeEventListener('touchmove', touchMoveHandler);
+            document.removeEventListener('touchend', touchEndHandler);
+        };
 
-            // Clean up event listeners
-            document.removeEventListener('touchmove', this);
-            document.removeEventListener('touchend', this);
+        document.addEventListener('touchmove', touchMoveHandler, { passive: false });
+        document.addEventListener('touchend', touchEndHandler, { passive: true }); // Marked as passive
+    }, { passive: true }); // Marked touchstart as passive
 
-            selectedList = null;
-        });
+    list.addEventListener('dragstart', function(e) {
+        const selectedList = e.target;
 
+        const dragOverHandler = (e) => {
+            e.preventDefault();
+        };
 
-        // For non-touch devices
-        list.addEventListener('dragstart', function (e) {
-            let selectedList = e.target;
+        const dropHandler = (box) => {
+            return function(e) {
+                appendToList(box, selectedList);
+            };
+        };
 
-            rightBox.addEventListener('dragover', function (e) {
-                e.preventDefault();
-            })
-            rightBox.addEventListener('drop', function (e) {
-                rightBox.appendChild(selectedList);
-                selectedList = null;
-            });
+        rightBox.addEventListener('dragover', dragOverHandler);
+        rightBox.addEventListener('drop', dropHandler(rightBox));
+        leftBox.addEventListener('dragover', dragOverHandler);
+        leftBox.addEventListener('drop', dropHandler(leftBox));
+    });
+}
 
-            //from right to left
-            leftBox.addEventListener('dragover', function (e) {
-                e.preventDefault();
-            })
-            leftBox.addEventListener('drop', function (e) {
-                leftBox.appendChild(selectedList);
-                selectedList = null;
-            });
-        })
-    }
 </script>
 
 </html>
