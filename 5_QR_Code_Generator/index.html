@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <title>QR Code Generator</title>
+</head>
+<body>
+    <div class="container">
+        <p>Enter your text or URL</p>
+        <input type="text" id="qrInput" placeholder="Text or URL link">
+        <div id="imgBox">
+            <img src="" id="qrImage" class="myImage">
+            <div id="spinner" style="display: none; text-align: center; padding: auto;">
+                <!-- You can use any spinner here, for example, a simple text or an animated GIF -->
+                Loading...
+            </div>
+        </div>
+        <button onclick="GenerateQRCode()">Generate <i class="fa-solid fa-qrcode"></i> Code</button>
+    </div>
+    <script>
+         var lastQRInput = ""; // Global variable to store the last QR code input
+        function GenerateQRCode() {
+    let imgBox = document.getElementById("imgBox");
+    let qrImage = document.getElementById("qrImage");
+    let qrInput = document.getElementById("qrInput");
+    var spinner = document.getElementById('spinner');
+   
+
+    if (qrInput.value.length > 0) {
+        if (qrInput.value !== lastQRInput) {
+            // Show spinner
+            spinner.style.display = 'block';
+            qrImage.style.display = 'none';
+
+            // Set QR code image source only if the input has changed
+            qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrInput.value);
+
+            lastQRInput = qrInput.value; // Update the last input value
+
+            // Add load event listener to hide spinner when image is loaded
+            qrImage.onload = function() {
+                spinner.style.display = 'none';
+                qrImage.style.display = 'block';
+            };
+
+            // Handle image load error
+            qrImage.onerror = function() {
+                spinner.style.display = 'none';
+                alert('Failed to load QR code.');
+            };
+        }
+    } else {
+        qrInput.classList.add('error');
+        setTimeout(() => {
+            qrInput.classList.remove('error');
+        }, 400);
+    }
+}
+
+
+
+    </script>
+</body>
+
+
+</html>

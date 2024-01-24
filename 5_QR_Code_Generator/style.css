@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #262a2f;
+
+}
+
+.container {
+    width: 23rem;
+    padding: 1rem 1.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 0.3rem;
+}
+
+.container p {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #494eea;
+}
+
+.container input {
+    width: 100%;
+    height: 3rem;
+    padding: 1rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+}
+.container button {
+    width: 100%;
+    height: 3rem;
+    border: none;
+    outline: none;
+    background: #494eea;
+    color: #fff;
+    border-radius: 0.3rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.4rem;
+
+}
+
+#imgBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+#qrImage {
+    display: none;
+    width: 100%;
+    padding: 1rem !important;
+    transition: all 0.5s;
+}
+
+
+/* Define keyframes for the fade-in from bottom animation */
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px); /* Start 20 pixels below the final position */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); /* End at the final position */
+    }
+  }
+  
+  /* Apply the animation to the image */
+  img.myImage {
+    animation-name: fadeInUp;
+    animation-duration: 1s; /* Animation will take 2 seconds */
+    animation-fill-mode: forwards; /* The image will stay at the final state when the animation ends */
+  }
+  
+  img.myImage {
+    animation-name: fadeInUp;
+    animation-duration: 1s; /* Animation will take 2 seconds */
+    animation-fill-mode: forwards; /* The image will stay at the final state when the animation ends */
+  }
+
+  
+  
+.error {
+  animation: shake 0.1s linear 10;
+
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-2px);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+
+  75% {
+    transform: translateX(2px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+
+}
