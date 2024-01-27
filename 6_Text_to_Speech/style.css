@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, cursive;
+}
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #010758, #490d61);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.hero h1 {
+    color: #fff;
+    font-size: 50px;
+    margin-bottom: 2rem;
+    margin-top: -10rem;
+    @media (max-width: 480px) {
+        font-size: 1.4rem;
+        top: 12%;
+    }
+
+}
+
+.hero h1 span {
+    color: #ff2963;
+
+}
+
+textarea {
+    width: 80%;
+    height: 15rem;
+    background: #403d84;
+    color: #fff;
+    font-size: 1rem;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    resize: none;
+
+}
+
+textarea::placeholder {
+    color: #fff;
+}
+
+button {
+    background: #ff2963;
+    color: #fff;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    @media (max-width: 480px) {
+        padding: 1rem 0.5rem;
+    }
+}
+
+button i {
+    padding-right: 0.6rem;
+    flex-shrink: 0;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    width: 80%; /* Ensure the row takes full width */
+}
+
+.select-wrapper {
+    position: relative;
+    flex-grow: 1; /* Allows the select wrapper to expand and fill available space */
+    margin-right: 0.8rem; /* Space between select and button */
+    @media (max-width: 480px) {
+        width: 55%;
+    }
+}
+
+.select-wrapper select {
+    width: 100%; /* Makes the select element take the full width of its parent */
+    height: 3.2rem;
+    padding: 0.8rem;
+    padding-right: 30px; /* Space for the icon */
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #403d84;
+
+    
+}
+
+.select-wrapper i {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust based on the size of your icon */
+    transform: translateY(-50%);
+    color: #fff;
+    pointer-events: none;
+}
