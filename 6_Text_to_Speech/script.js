@@ -1,23 +1,36 @@
+document.addEventListener('DOMContentLoaded', function() {
 let speech = new SpeechSynthesisUtterance();
+        let voices = [];
+        let voicesSelected = document.querySelector('#voice-selection');
 
-let voices = [];
-let voicesSelected = document.querySelector('select');
+        function populateVoices() {
+            voices = window.speechSynthesis.getVoices();
+            voicesSelected.innerHTML = ''; // Clear existing options
 
-window.speechSynthesis.onvoiceschanged = () => {
-    voices = window.speechSynthesis.getVoices();
-    speech.voice = voices[0];  // Set the default voice
+            voices.forEach((voice) => {
+                let option = new Option(voice.name, voice.name);
+                voicesSelected.appendChild(option);
+            });
+        }
 
-    voices.forEach((voice, i) => {
-        voicesSelected.options[i] = new Option(voice.name, voice.name);  // Populate the select dropdown
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+
+        // Initial call in case voices are already loaded
+        populateVoices();
+
+        document.querySelector('#speak-button').addEventListener('click', () => {
+            speech.text = document.querySelector('#text-to-speak').value;
+            let selectedVoiceName = voicesSelected.value;
+
+            let selectedVoice = voices.find(voice => voice.name === selectedVoiceName);
+            if (selectedVoice) {
+                speech.voice = selectedVoice;
+            } else {
+                console.error("Selected voice not found in available voices");
+            }
+
+            window.speechSynthesis.cancel(); // Cancel any ongoing speech
+            window.speechSynthesis.speak(speech); // Speak with the new voice
+        });
+
     });
-};
-
-voicesSelected.addEventListener('change', () => {
-    speech.voice = voices[voicesSelected.value];
-})
-
-document.querySelector('button').addEventListener('click', () => {
-    speech.text = document.querySelector('textarea').value;
-    speech.voice = voices.find(voice => voice.name === voicesSelected.value);  // Set the selected voice
-    window.speechSynthesis.speak(speech);
-});
