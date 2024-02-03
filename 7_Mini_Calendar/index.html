@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Mini Calender</title>
+</head>
+<body>
+    <div id="date-container" class="date-container">
+        <div class="date">
+          <span id="day-number"></span>
+          <span id="day-text"></span>
+        </div>
+        <div class="month">
+          <span id="month-text"></span>
+          <span id="year"></span>
+        </div>
+      </div>
+      <script>
+        function updateDate() {
+  const now = new Date();
+  const dayNumber = now.getDate();
+  const dayText = now.toLocaleString('en-us', { weekday: 'long' });
+  const monthText = now.toLocaleString('en-us', { month: 'short' });
+  const year = now.getFullYear();
+
+  document.getElementById('day-number').textContent = dayNumber;
+  document.getElementById('day-text').textContent = dayText;
+  document.getElementById('month-text').textContent = monthText;
+  document.getElementById('year').textContent = year;
+}
+
+// Call the function when the script loads
+updateDate();
+
+// Set it to update every midnight
+setTimeout(() => {
+  updateDate();
+  setInterval(updateDate, 24 * 60 * 60 * 1000);
+}, new Date().setHours(24, 0, 0, 0) - new Date());
+
+      </script>
+</body>
+</html>
