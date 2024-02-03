@@ -21,6 +21,7 @@ body, html {
     font-size: 4vw; /* Responsive font size */
     line-height: 1.2;
     
+    
   }
   
   .date, .month {
@@ -29,7 +30,6 @@ body, html {
     justify-content: center;
     align-items: center;
     color: white;
-    width: 50%;
     padding: 10px;
   }
   
