@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Fancy Clock</title>
+</head>
+<body>
+    <div class="shape blue-circle"></div>
+    <div class="shape red-square"></div>
+    
+    <div class="clock">
+      <div id="hours">--</div>
+      <div>:</div>
+      <div id="minutes">--</div>
+      <div>:</div>
+      <div id="seconds">--</div>
+    </div>
+
+      <script>
+        /* JavaScript code */
+        function updateClock() {
+          const now = new Date();
+          const hours = ('0' + now.getHours()).slice(-2);
+          const minutes = ('0' + now.getMinutes()).slice(-2);
+          const seconds = ('0' + now.getSeconds()).slice(-2);
+      
+          document.getElementById('hours').textContent = hours;
+          document.getElementById('minutes').textContent = minutes;
+          document.getElementById('seconds').textContent = seconds;
+        }
+      
+        setInterval(updateClock, 1000);
+        updateClock(); // Initialize clock immediately
+      </script>
+</body>
+</html>

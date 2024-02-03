@@ -1,0 +1,109 @@
+html, body {
+    min-height: 100vh; /* Use viewport height to ensure full coverage */
+    width: 100vw; /* Use viewport width to ensure full coverage */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+  }
+  
+
+  /* Clock styles */
+  .clock-container {
+    position: relative; /* Establish a positioning context */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw; /* Responsive width */
+  
+    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the clock */
+  }
+  
+  .clock {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    border-radius: 7px;
+    backdrop-filter: blur(40px);
+    z-index: 2; /* Ensures the clock is above the shapes */
+  }
+  
+  /* Number styles */
+  .clock div {
+    font-size: 6vw; /* Responsive font size */
+    padding: 0 1vw; /* Responsive spacing */
+  }
+  
+
+  
+  /* Decorative shapes */
+  .blue-circle, .red-square {
+    position: absolute;
+    z-index: 1; /* Below the clock */
+  }
+  
+  .blue-circle {
+    width: 12vw;
+    height: 12vw;
+    background-color: #358CED; /* Solid blue */
+    top: calc(50% - 3.5vw); /* Center vertically and offset by half the height */
+    left: calc(50% - 20.5vw); /* Adjust horizontal position */
+    border-radius: 50%; /* Circle */
+    position: absolute;
+  }
+  
+  .red-square {
+    width: 12vw;
+    height: 12vw;
+    background-color: rgba(255, 0, 0, 0.5); /* Semi-transparent red */
+    top: calc(50% - 8.5vw); /* Center vertically and offset by half the height */
+    left: calc(50% + 10.5vw); /* Adjust horizontal position */
+    border-radius: 3%; /* Slightly rounded corners for the square */
+    position: absolute;
+  }
+  
+    /* Smaller screens */
+    @media (max-width: 300px) {
+        .clock div {
+          font-size: 8vw; /* Adjusted font size for smaller screens */
+        }
+    
+      }
+
+      @media (max-width: 600px) {
+        .red-square {
+            top: calc(50% - 11vw); /* Center vertically and offset by half the height */
+            left: calc(50% + 12.5vw); /* Adjust horizontal position */
+        }
+        .blue-circle {
+            top: calc(50% - 2vw); /* Center vertically and offset by half the height */
+            left: 25vw; /* Adjust horizontal position */
+        }
+
+      }
