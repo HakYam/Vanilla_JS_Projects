@@ -71,9 +71,9 @@ html, body {
   .blue-circle {
     width: 12vw;
     height: 12vw;
-    background-color: #358CED; /* Solid blue */
+    background-color: #23a6d5; /* Solid blue */
     top: calc(50% - 3.5vw); /* Center vertically and offset by half the height */
-    left: calc(50% - 20.5vw); /* Adjust horizontal position */
+    left: calc(50% - 24vw); /* Adjust horizontal position */
     border-radius: 50%; /* Circle */
     position: absolute;
   }
@@ -98,12 +98,12 @@ html, body {
 
       @media (max-width: 700px) {
         .red-square {
-            top: calc(50% - 11vw); /* Center vertically and offset by half the height */
-            left: calc(50% + 12.5vw); /* Adjust horizontal position */
+            top: calc(50% - 10vw); /* Center vertically and offset by half the height */
+            left: calc(50% + 12vw); /* Adjust horizontal position */
         }
         .blue-circle {
             top: calc(50% - 2vw); /* Center vertically and offset by half the height */
-            left: calc(50% + 12.5vw); /* Adjust horizontal position */
+            right: calc(50% + 0vw ); /* Adjust horizontal position */
         }
 
       }
