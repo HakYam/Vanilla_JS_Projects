@@ -90,14 +90,3 @@ html, body {
     
       }
 
-      @media (max-width: 700px) {
-        .red-square {
-            top: calc(50% - 10vw); /* Center vertically and offset by half the height */
-            left: calc(50% + 12vw); /* Adjust horizontal position */
-        }
-        .blue-circle {
-            top: calc(50% - 2vw); /* Center vertically and offset by half the height */
-            right: calc(50% + 0vw ); /* Adjust horizontal position */
-        }
-
-      }
