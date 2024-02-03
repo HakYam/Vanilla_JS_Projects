@@ -34,8 +34,6 @@ html, body {
     justify-content: center;
     align-items: center;
     width: 80vw; /* Responsive width */
-  
-    
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Center the clock */
@@ -62,12 +60,6 @@ html, body {
   
 
   
-  /* Decorative shapes */
-  .blue-circle, .red-square {
-    position: absolute;
-    z-index: 1; /* Below the clock */
-  }
-  
   .blue-circle {
     width: 12vw;
     height: 12vw;
@@ -76,6 +68,7 @@ html, body {
     left: calc(50% - 24vw); /* Adjust horizontal position */
     border-radius: 50%; /* Circle */
     position: absolute;
+    z-index: 1;
   }
   
   .red-square {
@@ -86,12 +79,13 @@ html, body {
     left: calc(50% + 10.5vw); /* Adjust horizontal position */
     border-radius: 3%; /* Slightly rounded corners for the square */
     position: absolute;
+    z-index: 1;
   }
   
     /* Smaller screens */
     @media (max-width: 300px) {
         .clock div {
-          font-size: 8vw; /* Adjusted font size for smaller screens */
+          font-size: 10vw; /* Adjusted font size for smaller screens */
         }
     
       }
