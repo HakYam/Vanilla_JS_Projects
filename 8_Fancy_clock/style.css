@@ -82,11 +82,4 @@ html, body {
     z-index: 1;
   }
   
-    /* Smaller screens */
-    @media (max-width: 300px) {
-        .clock div {
-          font-size: 10vw; /* Adjusted font size for smaller screens */
-        }
-    
-      }
 
