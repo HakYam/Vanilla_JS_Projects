@@ -96,14 +96,14 @@ html, body {
     
       }
 
-      @media (max-width: 600px) {
+      @media (max-width: 700px) {
         .red-square {
             top: calc(50% - 11vw); /* Center vertically and offset by half the height */
             left: calc(50% + 12.5vw); /* Adjust horizontal position */
         }
         .blue-circle {
             top: calc(50% - 2vw); /* Center vertically and offset by half the height */
-            left: 25vw; /* Adjust horizontal position */
+            left: calc(50% + 12.5vw); /* Adjust horizontal position */
         }
 
       }
