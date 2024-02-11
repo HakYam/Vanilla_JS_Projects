@@ -26,7 +26,7 @@ async function searchImages() {
     const results = data.results;
 
     if (results.length === 0) {
-        searchResult.innerHTML = '<p style="text-align: center;">:( No images found. Please try a different search keyword.</p>'; // Display no results message
+        searchResult.innerHTML = '<p style="text-align: center;">No images found. Please try a different search keyword.</p>'; // Display no results message
         showMoreButton.style.display = 'none'; // Hide the "Load More" button
     } else {
         results.forEach((result) => {
