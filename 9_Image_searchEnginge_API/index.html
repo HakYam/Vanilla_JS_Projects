@@ -4,23 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Image Search Engine </title>
+    <title>Image Search Engine</title>
 </head>
 
 <body>
     <h1>Unsplash Image Search Engine</h1>
     <form id="search-form">
         <input type="text" id="search-box" placeholder="Search anything..." autocomplete="off">
-        <button>Search</button>
+        <button type="submit">Search</button>
     </form>
-    <div id="search-result">
-
-    </div>
+    <div id="search-result"></div>
     <button id="show-more-btn">Load More</button>
 
+    <!-- Lightbox container added below -->
+    <div id="lightbox" class="lightbox">
+        <span id="close-lightbox" class="close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" src="">
+        <a id="unsplash-link" target="_blank" class="unsplash-link">View on Unsplash</a>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="script.js"></script>
-
 </body>
 
 </html>
