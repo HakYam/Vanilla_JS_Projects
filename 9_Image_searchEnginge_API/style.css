@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'tahoma', sans-serif;
+}
+
+::-webkit-input-placeholder {
+    color: rgb(196, 196, 196);
+}
+
+:-moz-placeholder {
+    color: rgb(196, 196, 196);
+}
+
+::-moz-placeholder {
+    color: rgb(196, 196, 196);
+}
+
+:-ms-input-placeholder {
+    color: rgb(196, 196, 196);
+}
+
+body {
+    background-color: rgb(20, 4, 65);
+    color: #f1f1f1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+h1 {
+    text-align: center;
+    margin: 7rem auto 4rem;
+    font-weight: bold;
+    background: linear-gradient(to right, rgb(2, 109, 209), rgb(141, 42, 235), rgb(220, 9, 240));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+form {
+    width: 60%;
+    /* Adjust to ensure form does not exceed the viewport width */
+    max-width: 100rem;
+    /* Keeps form size reasonable on larger screens */
+    margin: auto;
+    background: #434989;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Distributes space between input and button */
+    padding: 0.5rem;
+    /* Adds padding inside the form */
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+
+    /* Applies border-radius to the entire form */
+    @media (max-width: 768px) {
+        width: 90%;
+    }
+}
+
+form input {
+    width: 75%;
+    /* Adjust based on the expected size of the button */
+    margin-right: 5%;
+    /* Ensures space between the input and the button */
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.3rem;
+    /* Adjust font size for readability */
+    padding: 0.5rem;
+    color: #f1f1f1;
+    box-sizing: border-box;
+}
+
+form button {
+    width: 20%;
+    /* Adjust so total width does not exceed 100% */
+    min-width: 60px;
+    /* Ensure button remains usable on narrow screens */
+    height: 100%;
+    /* Adjust height to fit content */
+    padding: 0.5rem 1rem;
+    /* Adjust padding to ensure button content is visible */
+    box-sizing: border-box;
+    border-radius: 0.3rem;
+    /* Consistent with overall design */
+    padding: 0.9rem 0.5rem;
+    background: #ff3929;
+    border: none;
+    outline: none;
+    color: #f1f1f1;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+
+
+}
+
+@media (max-width: 768px) {
+
+    form input,
+    form button {
+        font-size: 1rem;
+        /* Slightly reduce font size on smaller screens */
+    }
+}
+
+#show-more-btn {
+    padding: 1.2rem 1.2rem;
+    background: #ff3929;
+    border: none;
+    outline: none;
+    color: #f1f1f1;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    margin: 4rem auto 2rem;
+    display: none;
+}
+
+#search-result {
+    width: 90%;
+    margin: 4rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        width: 90%;
+        margin: 2rem auto;
+    }
+}
+
+#search-result img {
+    width: 100%;
+    height: 20rem;
+    /* Adjust to maintain aspect ratio */
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    #search-result img {
+        height: 10rem;
+        /* Adjust height for smaller screens */
+    }
+}
