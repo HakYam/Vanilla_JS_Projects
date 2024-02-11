@@ -25,15 +25,20 @@ async function searchImages() {
     }
     const results = data.results;
 
-    results.forEach((result) => {
-        const image = document.createElement('img');
-        image.src = result.urls.small;
-        image.dataset.unsplashUrl = result.links.html; // Store Unsplash URL in data attribute
-        image.classList.add('search-result-image'); // Optional: for styling
-        searchResult.appendChild(image);
-    });
+    if (results.length === 0) {
+        searchResult.innerHTML = '<p style="text-align: center;">:( No images found. Please try a different search keyword.</p>'; // Display no results message
+        showMoreButton.style.display = 'none'; // Hide the "Load More" button
+    } else {
+        results.forEach((result) => {
+            const image = document.createElement('img');
+            image.src = result.urls.small;
+            image.dataset.unsplashUrl = result.links.html; // Store Unsplash URL in data attribute
+            image.classList.add('search-result-image'); // Optional: for styling
+            searchResult.appendChild(image);
+        });
 
-    showMoreButton.style.display = 'block';
+        showMoreButton.style.display = 'block'; // Only show if there are results
+    }
 }
 
 // Event listener for submitting the search form
