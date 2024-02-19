@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="shadow">
+        <input type="date" id="birthdate" max="" class="date-picker">
+        <button id="calculate" class="calculate-btn">Calculate</button>
+        <div id="age-display" class="age-display"></div>
+    </div>
+
+    <script>
+
+        
+        function calculateAge() {
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            const today = new Date();
+            let age = today.getFullYear() - birthdate.getFullYear();
+            const m = today.getMonth() - birthdate.getMonth();
+
+            if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+                age--;
+            }
+
+            let lastBirthday = new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate());
+            if (today < lastBirthday) {
+                lastBirthday = new Date(today.getFullYear() - 1, birthdate.getMonth(), birthdate.getDate());
+            }
+            const timeSinceLastBirthday = new Date() - lastBirthday;
+
+            const days = Math.floor(timeSinceLastBirthday / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeSinceLastBirthday / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((timeSinceLastBirthday / (1000 * 60)) % 60);
+            const seconds = Math.floor((timeSinceLastBirthday / 1000) % 60);
+            const milliseconds = Math.floor(timeSinceLastBirthday % 1000).toString().padStart(3, '0');
+
+            document.getElementById('age-display').innerHTML = `<span class="years">${age}</span> Years, <span class="days">${days} </span> Days,  <span class="hours">${hours} </span> Hours, <span class="newline"> <span class="minutes">${minutes} </span> Minutes, <span class="seconds">${seconds} </span> Seconds, <span class="milliseconds">${milliseconds} </span> Millisecond</span> <span class="newline passed"> Have been passed </span>`;
+        }
+
+        document.getElementById('calculate').addEventListener('click', function () {
+            calculateAge(); // Initial calculation
+            setInterval(calculateAge, 100); // Update milliseconds and the rest every 100 milliseconds
+        });
+
+        // Set max date attribute to today for the date picker
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('birthdate').setAttribute('max', today);
+        
+    </script>
+</body>
+
+</html>
