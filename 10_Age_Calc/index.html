@@ -17,7 +17,7 @@
 
     <script>
 
-        
+
         function calculateAge() {
             const birthdate = new Date(document.getElementById('birthdate').value);
             const today = new Date();
@@ -40,7 +40,15 @@
             const seconds = Math.floor((timeSinceLastBirthday / 1000) % 60);
             const milliseconds = Math.floor(timeSinceLastBirthday % 1000).toString().padStart(3, '0');
 
-            document.getElementById('age-display').innerHTML = `<span class="years">${age}</span> Years, <span class="days">${days} </span> Days,  <span class="hours">${hours} </span> Hours, <span class="newline"> <span class="minutes">${minutes} </span> Minutes, <span class="seconds">${seconds} </span> Seconds, <span class="milliseconds">${milliseconds} </span> Millisecond</span> <span class="newline passed"> Have been passed </span>`;
+            document.getElementById('age-display').innerHTML = `
+    <span class="years">${age}</span> Years, 
+    <span class="days">${days}</span> Days<br>
+    <span class="hours">${hours}</span> Hours, 
+    <span class="minutes">${minutes}</span> Minutes,<br>
+    <span class="seconds">${seconds}</span> Seconds, 
+    <span class="milliseconds">${milliseconds}</span> Milliseconds<br>
+    <span class="passed">Have been passed</span>`;
+
         }
 
         document.getElementById('calculate').addEventListener('click', function () {
@@ -51,7 +59,7 @@
         // Set max date attribute to today for the date picker
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('birthdate').setAttribute('max', today);
-        
+
     </script>
 </body>
 
