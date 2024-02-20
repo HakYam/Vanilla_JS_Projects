@@ -120,6 +120,7 @@ body {
         /* Adjust padding to ensure text is vertically centered */
         line-height: 1.42857143;
         /* Adjust line height to improve text alignment */
+        color: white !important;
     }
 }
 
